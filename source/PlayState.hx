@@ -875,6 +875,10 @@ class PlayState extends MusicBeatState
 		noteTypeMap = null;
 		eventPushedMap.clear();
 		eventPushedMap = null;
+		
+		#if android
+		addAndroidControls();
+		#end
 
 		// After all characters being loaded, it makes then invisible 0.01s later so that the player won't freeze when you change characters
 		// add(strumLine);
@@ -959,6 +963,11 @@ class PlayState extends MusicBeatState
 		botplayTxt.borderSize = 1.25;
 		botplayTxt.visible = cpuControlled;
 		add(botplayTxt);
+		
+		var creditTxt = new FlxText(876, 648, 348);
+    creditTxt.text = "PORTED BY\nEnzo Mods"; creditTxt.setFormat(Paths.font("vcr.ttf"), 30, FlxColor.WHITE, RIGHT, FlxTextBorderStyle.OUTLINE,FlxColor.BLACK);
+    creditTxt.scrollFactor.set();
+    add(creditTxt);
 
 		switch(songName)
 		{
@@ -993,7 +1002,7 @@ class PlayState extends MusicBeatState
 		}
 
 		if(ClientPrefs.downScroll) {
-			botplayTxt.y = timeBarBG.y - 78;
+			creditTxt.y = 148;
 		}
 
 		curse.cameras = [camHUD];
@@ -1016,7 +1025,11 @@ class PlayState extends MusicBeatState
 		timeBarBG.cameras = [camHUD];
 		timeTxt.cameras = [camHUD];
 		doof.cameras = [camHUD];
-
+		
+		#if android
+		addAndroidControls();
+		androidControls.visible = true;
+		#end
 
 		switch(curSong){
 			case 'castoff' | 'acupuncture' | 'toykeeper' | 'bad-end' | 'bad end':
