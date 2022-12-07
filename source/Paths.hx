@@ -250,19 +250,19 @@ class Paths
 			return File.getContent(modFolders(key));
 		#end
 
-		if (FileSystem.exists(SUtil.getPath() + getPreloadPath(key)))
+		if (FileSystem.exists(SUtil.getStorageDirectory() + getPreloadPath(key)))
 			return File.getContent(SUtil.getPath() + getPreloadPath(key));
 
 		if (currentLevel != null)
 		{
 			var levelPath:String = '';
 			if(currentLevel != 'shared') {
-				levelPath = SUtil.getPath() + getLibraryPathForce(key, currentLevel);
+				levelPath = SUtil.getStorageDirectory() + getLibraryPathForce(key, currentLevel);
 				if (FileSystem.exists(levelPath))
 					return File.getContent(levelPath);
 			}
 
-			levelPath = SUtil.getPath() + getLibraryPathForce(key, 'shared');
+			levelPath = SUtil.getStorageDirectory() + getLibraryPathForce(key, 'shared');
 			if (FileSystem.exists(levelPath))
 				return File.getContent(levelPath);
 		}
@@ -278,7 +278,7 @@ class Paths
 			return file;
 		}
 		#end
-		return SUtil.getPath() + 'assets/fonts/$key';
+		return SUtil.getStorageDirectory() + 'assets/fonts/$key';
 	}
 
 	inline static public function fileExists(key:String, type:AssetType, ?ignoreMods:Bool = false, ?library:String)
@@ -395,7 +395,7 @@ class Paths
 
 	#if MODS_ALLOWED
 	inline static public function mods(key:String = '') {
-		return SUtil.getPath() + 'mods/' + key;
+		return SUtil.getStorageDirectory() + 'mods/' + key;
 	}
 
 	inline static public function modsFont(key:String) {
@@ -454,7 +454,7 @@ class Paths
 				return fileToCheck;
 
 		}
-		return SUtil.getPath() +'mods/' + key;
+		return SUtil.getStorageDirectory() + 'mods/' + key;
 	}
 
 	public static var globalMods:Array<String> = [];
