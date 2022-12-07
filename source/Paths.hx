@@ -251,7 +251,7 @@ class Paths
 		#end
 
 		if (FileSystem.exists(SUtil.getStorageDirectory() + getPreloadPath(key)))
-			return File.getContent(SUtil.getPath() + getPreloadPath(key));
+			return File.getContent(SUtil.getStorageDirectory() + getPreloadPath(key));
 
 		if (currentLevel != null)
 		{
