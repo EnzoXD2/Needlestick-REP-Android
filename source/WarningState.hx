@@ -57,11 +57,14 @@ class WarningState extends MusicBeatState {
         selectionText.setFormat(Paths.font("vcr.ttf"), 32, FlxColor.WHITE, CENTER, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
 		selectionText.screenCenter(X);
 		add(selectionText);
+	#if android
+        addVirtualPad(NONE, A_B);
+        #end
         super.create();
     }
 
 	override function update(elapsed:Float) {
-        if(FlxG.keys.justPressed.ENTER && !cooldown) {
+        if(FlxG.keys.justPressed.ENTER || virtualPad.buttonA.justPressed && !cooldown) {
             if(!curSelected) {
                 trace("yeah");
                 ClientPrefs.menufilter = true;
@@ -80,7 +83,7 @@ class WarningState extends MusicBeatState {
                 cooldown = false;
             });
         }
-        if(FlxG.keys.justPressed.SPACE) {
+        if(FlxG.keys.justPressed.SPACE || virtualPad.buttonB.justPressed) {
             ClientPrefs.showWarningScreen = false;
 
             var warningSave:FlxSave = new FlxSave();
